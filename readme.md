@@ -1,4 +1,4 @@
-#Usage
+# Usage
 
 ```php
 $agilePay = new \AgilePay\Sdk\AgilePay([
@@ -7,9 +7,9 @@ $agilePay = new \AgilePay\Sdk\AgilePay([
 ]);
 ```
 
-##Gateways
+## Gateways
 
-####To create a new gateway :
+#### To create a new gateway :
 
 ```php
 $gateway = $agilePay->gateway()->create('stripe', [
@@ -23,9 +23,9 @@ The response will contain a gateway **reference** which is used to perform trans
 $gateway->reference;
 ```
 
-##Payment methods
+## Payment methods
 
-####To create a new payment method type of gateway token:
+#### To create a new payment method type of gateway token:
 
 In this case the payment method will be retained with the provided gateway,
 please check the availability of transaction store in the gateways
@@ -51,9 +51,9 @@ The response will contain a payment method **token** which is used to perform tr
 $paymentMethod->token;
 ```
 
-##Transactions
+## Transactions
 
-####Auth (Charge a credit card with a payment method type of gateway token):
+#### Auth (Charge a credit card with a payment method type of gateway token):
 ```php
 $transaction = $agilePay->transaction()
                 ->setPaymentMethod($paymentMethod->token;)
@@ -66,17 +66,17 @@ The response will contain a **reference** which can be used for second steps tra
 $transaction->reference;
 ```
 
-####Void (Cancel an authorized transaction):
+#### Void (Cancel an authorized transaction):
 ```php
 $response = $agilePay->transaction($transaction->reference)->void();
 ```
 
-####Capture (Settle an authorized transaction):
+#### Capture (Settle an authorized transaction):
 ```php
 $response = $agilePay->transaction($transaction->reference)->capture();
 ```
 
-####Credit (Refund a settled transaction):
+#### Credit (Refund a settled transaction):
 ```php
 $response = $agilePay->transaction($transaction->reference)->credit();
 ```
