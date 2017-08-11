@@ -1,4 +1,10 @@
-# Usage
+## Install
+
+```bash
+$ composer require agile-pay/sdk:dev-master
+```
+
+## Usage
 
 ```php
 $agilePay = new \AgilePay\Sdk\AgilePay([
