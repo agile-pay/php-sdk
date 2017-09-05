@@ -12,6 +12,7 @@ use AgilePay\Sdk\Exceptions\ConfigurationException;
 use AgilePay\Sdk\Exceptions\Http\ValidationException;
 use AgilePay\Sdk\Exceptions\Http\ServerErrorException;
 use AgilePay\Sdk\Exceptions\Http\UnauthorizedException;
+use AgilePay\Sdk\Exceptions\Http\PaymentRequiredException;
 use AgilePay\Sdk\Exceptions\Http\TooManyRequestsException;
 
 class ClientTest extends TestCase
@@ -53,6 +54,15 @@ class ClientTest extends TestCase
         try{
             $client->$method('test');
         }catch(UnauthorizedException $e){
+            $this->assertTrue(true);
+        }
+        //402
+        $guzzle = $this->mockGuzzle();
+        $guzzle->shouldReceive($method)->andReturn($this->mockPsrResponse(402));
+        $client = $this->mockClient($guzzle);
+        try{
+            $client->$method('test');
+        }catch(PaymentRequiredException $e){
             $this->assertTrue(true);
         }
         //403

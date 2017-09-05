@@ -4,6 +4,7 @@ namespace AgilePay\Sdk;
 
 use AgilePay\Sdk\Client;
 use GuzzleHttp\Client as Guzzle;
+use AgilePay\Sdk\Resources\Credit;
 use AgilePay\Sdk\Resources\Gateway;
 use AgilePay\Sdk\Resources\Webhook;
 use AgilePay\Sdk\Resources\Schedule;
@@ -21,6 +22,14 @@ class AgilePay
     public function __construct(array $config)
     {
         $this->client = new Client(new Guzzle(), $config);
+    }
+
+    /**
+     * @return \AgilePay\Sdk\Resources\Credit
+     */
+    public function credit()
+    {
+        return new Credit($this->client);
     }
 
     /**

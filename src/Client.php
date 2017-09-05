@@ -14,6 +14,7 @@ use AgilePay\Sdk\Exceptions\ConfigurationException;
 use AgilePay\Sdk\Exceptions\Http\ValidationException;
 use AgilePay\Sdk\Exceptions\Http\ServerErrorException;
 use AgilePay\Sdk\Exceptions\Http\UnauthorizedException;
+use AgilePay\Sdk\Exceptions\Http\PaymentRequiredException;
 use AgilePay\Sdk\Exceptions\Http\TooManyRequestsException;
 
 class Client
@@ -211,6 +212,7 @@ class Client
         }else switch ($status){
             //4xx
             case 401 : throw new UnauthorizedException('Wrong authentication'); break;
+            case 402 : throw new PaymentRequiredException('Either a payment is required or you don\'t have enough credit'); break;
             case 403 : throw new UnauthorizedException('You are not authorized to perform this action'); break;
             case 404 : throw new NotFoundException($response->getBody()->getContents()); break;
             case 408 : throw new TimeoutException(); break;

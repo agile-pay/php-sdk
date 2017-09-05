@@ -3,6 +3,7 @@
 namespace AgilePay\Sdk\Tests\Unit;
 
 use AgilePay\Sdk\AgilePay;
+use AgilePay\Sdk\Resources\Credit;
 use AgilePay\Sdk\Resources\Gateway;
 use AgilePay\Sdk\Resources\Webhook;
 use AgilePay\Sdk\Resources\Schedule;
@@ -21,6 +22,11 @@ class AgilePayTest extends TestCase
     {
         parent::setUp();
         $this->agilePay = new AgilePay($this->getConfig());
+    }
+
+    public function testCredit()
+    {
+        $this->assertTrue($this->agilePay->credit() instanceof Credit);
     }
 
     public function testGateway()
