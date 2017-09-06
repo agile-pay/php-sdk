@@ -33,28 +33,6 @@ class TransactionTest extends TestCase
         $this->transaction->setPaymentMethod($this->createDummyPaymentMethod()->token);
     }
 
-    public function testScheduleAuth()
-    {
-        $at = (new DateTime())->modify('+1 month');
-        $type = 'auth';
-        $timezone = 'Europe/Rome';
-
-        //creating a payment method to be kept in order to process a scheduled transaction
-        $this->transaction->setPaymentMethod($this->createDummyPaymentMethod('card', ['keep' => true])->token);
-
-        $response = $this->transaction->schedule($type, $at->format('Y-m-d H:i:s'), $timezone, [
-            'amount' => 500,
-            'currency_code' => 'eur'
-        ], [
-            $at->modify('+1 day')->format('Y-m-d H:i:s'),
-            $at->modify('+1 day')->format('Y-m-d H:i:s'),
-        ]);
-
-        $this->assertNotNull($response);
-        $this->assertArrayHasKey('reference', $response->toArray());
-        $this->assertArrayHasKey('retries', $response->toArray());
-    }
-
     public function testList()
     {
         $transactionClient = new Transaction($this->client);

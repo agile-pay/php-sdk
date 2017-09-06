@@ -10,6 +10,7 @@ use AgilePay\Sdk\Resources\Schedule;
 use AgilePay\Sdk\Resources\Transaction;
 use AgilePay\Sdk\Resources\ClientToken;
 use AgilePay\Sdk\Resources\PaymentMethod;
+use AgilePay\Sdk\Resources\TransactionSchedule;
 
 class AgilePayTest extends TestCase
 {
@@ -57,5 +58,10 @@ class AgilePayTest extends TestCase
     public function testClientToken()
     {
         $this->assertTrue($this->agilePay->clientToken() instanceof ClientToken);
+    }
+
+    public function testTransactionSchedule()
+    {
+        $this->assertTrue($this->agilePay->transactionSchedule() instanceof TransactionSchedule);
     }
 }

@@ -27,20 +27,6 @@ class Transaction
     protected $gatewayReference;
 
     /**
-     * The webhook reference
-     *
-     * @var string
-     */
-    protected $webhookReference;
-
-    /**
-     * The schedule reference
-     *
-     * @var string
-     */
-    protected $scheduleReference;
-
-    /**
      * The payment method token
      *
      * @var string
@@ -101,36 +87,6 @@ class Transaction
                 ] + $data
             ]
         );
-    }
-
-    /**
-     * Schedule a transaction to be executed in the future
-     *
-     * @param string $type The type of transaction to be scheduled
-     * @param string $at The datetime when the transaction will be executed
-     * @param string $timezone The timezone
-     * @param array $data The transaction data
-     * @param array $retries The retries array
-     * @return \AgilePay\Sdk\Response
-     */
-    public function schedule($type, $at, $timezone, array $data, array $retries = [])
-    {
-        $notMandatory = [];
-
-        if (count($retries)) $notMandatory['retries'] = $retries;
-        if ($this->webhookReference) $notMandatory['webhook'] = $this->webhookReference;
-        if ($this->scheduleReference) $notMandatory['schedule'] = $this->scheduleReference;
-
-        return $this->client->post('transaction-schedules', [
-            'body' => [
-                'transaction_type' => $type,
-                'schedule_at' => $at,
-                'timezone' => $timezone,
-                'gateway' => $this->gatewayReference,
-                'payment_method' => $this->paymentMethodToken,
-                'transaction_data' => $data
-            ] + $notMandatory
-        ]);
     }
 
     /**
@@ -222,19 +178,6 @@ class Transaction
     public function setPaymentMethod($token)
     {
         $this->paymentMethodToken = $token;
-
-        return $this;
-    }
-
-    /**
-     * Set the webhook reference for scheduled transactions
-     *
-     * @param $reference
-     * @return $this
-     */
-    public function setWebhook($reference)
-    {
-        $this->webhookReference = $reference;
 
         return $this;
     }

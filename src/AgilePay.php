@@ -11,6 +11,7 @@ use AgilePay\Sdk\Resources\Schedule;
 use AgilePay\Sdk\Resources\ClientToken;
 use AgilePay\Sdk\Resources\Transaction;
 use AgilePay\Sdk\Resources\PaymentMethod;
+use AgilePay\Sdk\Resources\TransactionSchedule;
 
 class AgilePay
 {
@@ -83,5 +84,14 @@ class AgilePay
     public function paymentMethod($token = '')
     {
         return new PaymentMethod($this->client, $token);
+    }
+
+    /**
+     * @param string $reference
+     * @return TransactionSchedule
+     */
+    public function transactionSchedule($reference = '')
+    {
+        return new TransactionSchedule($this->client, $reference);
     }
 }

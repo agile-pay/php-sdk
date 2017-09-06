@@ -111,6 +111,16 @@ class Client
     }
 
     /**
+     * @param $uri
+     * @param array $options
+     * @return \AgilePay\Sdk\Response
+     */
+    public function delete($uri, array $options = [])
+    {
+        return $this->request('DELETE', $uri, $options);
+    }
+
+    /**
      * Perform an http request
      *
      * @param $method
