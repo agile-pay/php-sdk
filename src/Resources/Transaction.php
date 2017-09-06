@@ -110,12 +110,14 @@ class Transaction
      * @param string $at The datetime when the transaction will be executed
      * @param string $timezone The timezone
      * @param array $data The transaction data
+     * @param array $retries The retries array
      * @return \AgilePay\Sdk\Response
      */
-    public function schedule($type, $at, $timezone, array $data)
+    public function schedule($type, $at, $timezone, array $data, array $retries = [])
     {
         $notMandatory = [];
 
+        if (count($retries)) $notMandatory['retries'] = $retries;
         if ($this->webhookReference) $notMandatory['webhook'] = $this->webhookReference;
         if ($this->scheduleReference) $notMandatory['schedule'] = $this->scheduleReference;
 
