@@ -144,7 +144,10 @@ class Client
             $options, [
                 'base_uri' => $this->getBaseUri(),
                 'http_errors' => false,
-                'verify' => $this->config['environment'] == self::ENV_PRODUCTION ? true : false
+                'verify' => $this->config['environment'] == self::ENV_PRODUCTION ? true : false,
+                'headers' => [
+                    'User-Agent' => 'agile-pay/php'
+                ]
             ]
         );
 
