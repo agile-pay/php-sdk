@@ -1,7 +1,7 @@
 ## Install
 
 ```bash
-$ composer require agile-pay/sdk:dev-master
+$ composer require agile-pay/sdk:1.0.0-beta
 ```
 
 ## Usage

@@ -146,7 +146,7 @@ class Client
                 'http_errors' => false,
                 'verify' => $this->config['environment'] == self::ENV_PRODUCTION ? true : false,
                 'headers' => [
-                    'User-Agent' => 'agile-pay/php'
+                    'User-Agent' => 'agile-pay/php/1.0.0-beta'
                 ]
             ]
         );
