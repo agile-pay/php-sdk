@@ -26,7 +26,7 @@ class TooManyRequestsException extends \Exception
      *
      * @return DateTime
      */
-    public function resettingAt()
+    public function retryAt()
     {
         return $this->resettingAt;
     }

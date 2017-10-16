@@ -21,7 +21,7 @@ class TooManyRequestsExceptionTest extends TestCase
         $this->assertRegExp('/120/', $exception->getMessage());
         $this->assertEquals(
             $datetime->getTimestamp(),
-            $exception->resettingAt()->getTimestamp()
+            $exception->retryAt()->getTimestamp()
         );
     }
 }
