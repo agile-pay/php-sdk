@@ -146,7 +146,11 @@ class Client
                 'http_errors' => false,
                 'verify' => $this->config['environment'] == self::ENV_PRODUCTION ? true : false,
                 'headers' => [
-                    'User-Agent' => 'agile-pay/php/1.0.0-beta'
+                    'User-Agent' => sprintf('agile-pay/php/1.0.0 php-version:%s os:%s/%s',
+                        phpversion(),
+                        php_uname('s'),
+                        php_uname('r')
+                    )
                 ]
             ]
         );
