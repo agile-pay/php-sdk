@@ -26,7 +26,7 @@ class TransactionScheduleTest extends TestCase
         $this->transactionSchedule->setPaymentMethod($this->createDummyPaymentMethod()->token);
     }
 
-    public function testCancel()
+    public function testDelete()
     {
         $at = (new DateTime())->modify('+1 month');
         $type = 'auth';
@@ -43,7 +43,7 @@ class TransactionScheduleTest extends TestCase
             $at->modify('+1 day')->format('Y-m-d H:i:s'),
         ]);
 
-        $response = $this->transactionSchedule->setReference($response->reference)->cancel();
+        $response = $this->transactionSchedule->setReference($response->reference)->delete();
 
         $this->assertEquals(204, $response->getStatusCode());
     }

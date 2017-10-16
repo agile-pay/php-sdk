@@ -29,11 +29,4 @@ class Schedule
     {
         return new AdHoc($this->client, $this->reference);
     }
-
-    /**
-     * Cancel a schedule
-     * @todo
-     */
-    public function cancel()
-    {}
 }

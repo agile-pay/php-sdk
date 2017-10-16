@@ -46,7 +46,7 @@ class Transaction
      */
     public function get()
     {
-        return $this->client->get("transaction/{$this->reference}");
+        return $this->client->get("transactions/{$this->reference}");
     }
 
     /**

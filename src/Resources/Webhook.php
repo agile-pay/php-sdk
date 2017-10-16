@@ -61,7 +61,7 @@ class Webhook
      */
     public function update(array $data)
     {
-        return $this->client->put("webhook/{$this->reference}/update",
+        return $this->client->put("webhooks/{$this->reference}",
             [
                 'body' => $data
             ]

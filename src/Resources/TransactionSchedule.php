@@ -148,12 +148,12 @@ class TransactionSchedule
     }
 
     /**
-     * Cancel a scheduled transaction
+     * Delete a scheduled transaction
      *
      * @return \AgilePay\Sdk\Response
      */
-    public function cancel()
+    public function delete()
     {
-        return $this->client->delete("transaction-schedule/{$this->reference}");
+        return $this->client->delete("transaction-schedules/{$this->reference}");
     }
 }

@@ -53,7 +53,7 @@ class PaymentMethod
      */
     public function get()
     {
-        return $this->client->get("payment-method/{$this->token}");
+        return $this->client->get("payment-methods/{$this->token}");
     }
 
     /**

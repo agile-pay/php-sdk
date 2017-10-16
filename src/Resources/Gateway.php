@@ -49,18 +49,9 @@ class Gateway
      */
     public function update(array $fields = [])
     {
-        return $this->client->put("gateway/{$this->reference}/update", [
+        return $this->client->put("gateways/{$this->reference}", [
             'body' => $fields
         ]);
     }
 
-    /**
-     * Retrieves the gateways list
-     *
-     * @todo
-     * @param array $options
-     * @return \AgilePay\Sdk\Response
-     */
-    public function retrieve(array $options = [])
-    {}
 }
