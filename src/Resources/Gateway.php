@@ -44,13 +44,13 @@ class Gateway
     /**
      * Update an existing gateway
      *
-     * @param array $fields
+     * @param array $body
      * @return \AgilePay\Sdk\Response
      */
-    public function update(array $fields = [])
+    public function update(array $body = [])
     {
         return $this->client->put("gateways/{$this->reference}", [
-            'body' => $fields
+            'body' => $body
         ]);
     }
 
