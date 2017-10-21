@@ -3,6 +3,7 @@
 namespace AgilePay\Sdk\Resources;
 
 use AgilePay\Sdk\Client;
+use AgilePay\Sdk\PaginatedResponse;
 
 class Gateway
 {
@@ -22,6 +23,44 @@ class Gateway
     {
         $this->client = $client;
         $this->reference = $reference;
+    }
+
+    /**
+     * Retrieve a specific gateway
+     *
+     * @return \AgilePay\Sdk\Response
+     */
+    public function get()
+    {
+        return $this->client->get('gateways/'.$this->reference);
+    }
+
+    /**
+     * Retrieve the gateways list
+     *
+     * @param array $options
+     * @return PaginatedResponse
+     */
+    public function getList(array $options = [])
+    {
+        $response = $this->client->get('gateways', [
+            'query' => $options
+        ]);
+
+        return new PaginatedResponse($this->client, $response);
+    }
+
+    /**
+     * Set a gateway reference
+     *
+     * @param $reference
+     * @return $this
+     */
+    public function setReference($reference)
+    {
+        $this->reference = $reference;
+
+        return $this;
     }
 
     /**
