@@ -18,6 +18,7 @@ use AgilePay\Sdk\Exceptions\Http\TooManyRequestsException;
 class Client
 {
     const API_VERSION = 1;
+    const SDK_VERSION = '1.0.0';
 
     const ENV_LOCAL = 'local';
     const ENV_TESTING = 'testing';
@@ -145,7 +146,8 @@ class Client
                 'http_errors' => false,
                 'verify' => $this->config['environment'] == self::ENV_PRODUCTION ? true : false,
                 'headers' => [
-                    'User-Agent' => sprintf('agile-pay/php/1.0.0 php-version:%s os:%s/%s',
+                    'User-Agent' => sprintf('agile-pay/php/%s php-version:%s os:%s/%s',
+                        self::SDK_VERSION,
                         phpversion(),
                         php_uname('s'),
                         php_uname('r')
