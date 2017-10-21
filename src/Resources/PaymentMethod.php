@@ -3,6 +3,7 @@
 namespace AgilePay\Sdk\Resources;
 
 use AgilePay\Sdk\Client;
+use AgilePay\Sdk\PaginatedResponse;
 
 class PaymentMethod
 {
@@ -60,15 +61,17 @@ class PaymentMethod
      * Retrieve the payment methods list
      *
      * @param array $options
-     * @return \AgilePay\Sdk\Response
+     * @return \AgilePay\Sdk\PaginatedResponse
      */
     public function getList(array $options = [])
     {
-        return $this->client->get(
+        $response =  $this->client->get(
             'payment-methods', [
                 'query' => $options
             ]
         );
+
+        return new PaginatedResponse($this->client, $response);
     }
 
     /**
