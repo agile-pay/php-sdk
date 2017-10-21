@@ -78,7 +78,7 @@ class Transaction
     public function auth($amount, $currency, array $data = [])
     {
         return $this->client->post(
-            'transaction/auth', [
+            'transactions/auth', [
                 'body' => [
                     'gateway' => $this->gatewayReference,
                     'payment_method' => $this->paymentMethodToken,
@@ -195,29 +195,6 @@ class Transaction
             "The transaction {$transactionType} requires a transaction reference "
         );
 
-        return "transaction/{$this->reference}/$transactionType";
-    }
-
-    /**
-     * Render the uri required to process the first stage transactions
-     *
-     * @param $transactionType
-     * @return string
-     * @throws ConfigurationException
-     */
-    protected function renderFirstStageUri($transactionType)
-    {
-        if (   ! $this->gatewayReference
-            || ! $this->paymentMethodToken
-        )throw new ConfigurationException(
-             "The transaction {$transactionType} requires both: "
-           . "the payment method token and the gateway reference"
-        );
-
-        return sprintf("gateway/%s/payment-method/%s/%s",
-            $this->gatewayReference,
-            $this->paymentMethodToken,
-            $transactionType
-        );
+        return "transactions/{$this->reference}/$transactionType";
     }
 }
