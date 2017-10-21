@@ -39,8 +39,11 @@ class PaymentMethodTest extends TestCase
 
     public function testGetList()
     {
-        $res = $this->paymentMethod->getList();
-        $this->assertNotNull($res);
+        $response = $this->paymentMethod->getList();
+        $this->assertEquals(200, $response->getResponse()->getStatusCode());
+        //testing with options
+        $pms = $this->paymentMethod->getList(['page' => 2]);
+        $this->assertEquals(2, $pms->currentPage());
     }
 
     public function testCreateCard()
