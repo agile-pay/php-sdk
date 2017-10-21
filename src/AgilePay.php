@@ -7,6 +7,7 @@ use GuzzleHttp\Client as Guzzle;
 use AgilePay\Sdk\Resources\Credit;
 use AgilePay\Sdk\Resources\Gateway;
 use AgilePay\Sdk\Resources\Webhook;
+use AgilePay\Sdk\Resources\Customer;
 use AgilePay\Sdk\Resources\Schedule;
 use AgilePay\Sdk\Resources\ClientToken;
 use AgilePay\Sdk\Resources\Transaction;
@@ -40,6 +41,15 @@ class AgilePay
     public function gateway($reference = '')
     {
         return new Gateway($this->client, $reference);
+    }
+
+    /**
+     * @param string $reference
+     * @return \AgilePay\Sdk\Resources\Customer
+     */
+    public function customer($reference = '')
+    {
+        return new Customer($this->client, $reference);
     }
 
     /**

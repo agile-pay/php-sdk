@@ -4,8 +4,9 @@ namespace AgilePay\Sdk\Tests\Integration;
 
 use DateTime;
 use AgilePay\Sdk\Client;
-use AgilePay\Sdk\Resources\Gateway;
 use GuzzleHttp\Client as Guzzle;
+use AgilePay\Sdk\Resources\Gateway;
+use AgilePay\Sdk\Resources\Customer;
 use AgilePay\Sdk\Resources\PaymentMethod;
 
 class TestCase extends \PHPUnit_Framework_TestCase
@@ -34,6 +35,20 @@ class TestCase extends \PHPUnit_Framework_TestCase
     {
         return (new Gateway($this->client))->create('test', [
             'dummy_key' => uniqid('api-key')
+        ]);
+    }
+
+    /**
+     * Creates a new dummy customer
+     *
+     * @return \AgilePay\Sdk\Response
+     */
+    protected function createDummyCustomer()
+    {
+        return (new Customer($this->client))->create([
+            'email' => 'test'.uniqid().'@email.com',
+            'last_name' => 'Rossi',
+            'first_name' => 'Mario',
         ]);
     }
 

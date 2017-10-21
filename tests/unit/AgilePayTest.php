@@ -6,6 +6,7 @@ use AgilePay\Sdk\AgilePay;
 use AgilePay\Sdk\Resources\Credit;
 use AgilePay\Sdk\Resources\Gateway;
 use AgilePay\Sdk\Resources\Webhook;
+use AgilePay\Sdk\Resources\Customer;
 use AgilePay\Sdk\Resources\Schedule;
 use AgilePay\Sdk\Resources\Transaction;
 use AgilePay\Sdk\Resources\ClientToken;
@@ -33,6 +34,11 @@ class AgilePayTest extends TestCase
     public function testGateway()
     {
         $this->assertTrue($this->agilePay->gateway() instanceof Gateway);
+    }
+
+    public function testCustomer()
+    {
+        $this->assertTrue($this->agilePay->customer() instanceof Customer);
     }
 
     public function testWebhook()
