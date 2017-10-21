@@ -33,21 +33,6 @@ class TransactionTest extends TestCase
         $this->transaction->setPaymentMethod($this->createDummyPaymentMethod()->token);
     }
 
-    public function testList()
-    {
-        $transactionClient = new Transaction($this->client);
-        $response = $transactionClient->getList();
-        $this->assertNotNull($response);
-        $this->assertArrayHasKey('current_page', $response->toArray());
-        //testing by retrieving pages as well
-        $response = $transactionClient->getList([
-            'page' => 2
-        ]);
-        $this->assertNotNull($response);
-        $this->assertArrayHasKey('current_page', $response->toArray());
-        $this->assertEquals($response->current_page, 2);
-    }
-
     public function testGet()
     {
         $transactionClient = $this->transaction;
@@ -56,6 +41,15 @@ class TransactionTest extends TestCase
         $res = $transactionClient->get();
         $this->assertNotNull($res);
         $this->assertArrayHasKey('reference', $res->toArray());
+    }
+
+    public function testGetList()
+    {
+        $response = $this->transaction->getList();
+        $this->assertEquals(200, $response->getResponse()->getStatusCode());
+        //testing with options
+        $trans = $this->transaction->getList(['page' => 2]);
+        $this->assertEquals(2, $trans->currentPage());
     }
 
     public function testAuth()
