@@ -3,6 +3,7 @@
 namespace AgilePay\Sdk\Resources;
 
 use AgilePay\Sdk\Client;
+use AgilePay\Sdk\PaginatedResponse;
 
 class Customer
 {
@@ -46,11 +47,15 @@ class Customer
      * Retrieves the list of customers
      *
      * @param array $options
-     * @return \AgilePay\Sdk\Response
+     * @return \AgilePay\Sdk\PaginatedResponse
      */
     public function getList(array $options = [])
     {
+        $response = $this->client->get('customers', [
+            'query' => $options
+        ]);
 
+        return new PaginatedResponse($this->client, $response);
     }
 
     /**

@@ -29,7 +29,12 @@ class CustomerTest extends TestCase
 
     public function testGetList()
     {
-        $this->markTestSkipped();
+        $this->createDummyCustomer();
+        $customers = $this->customer->getList();
+        $this->assertEquals(200, $customers->getResponse()->getStatusCode());
+        //testing with options
+        $customers = $this->customer->getList(['page' => 2]);
+        $this->assertEquals(2, $customers->currentPage());
     }
 
     public function testCreate()
