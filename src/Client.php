@@ -155,28 +155,15 @@ class Client
             ]
         );
 
-        $attempts = 0;
+        //if the request contains a query string we need to append it to the URI so that
+        //the signature will be calculated based on the query string variables as well
+        if (array_key_exists('query', $options) && strlen(implode($options['query']))){
+            $uri = "$uri?".http_build_query($options['query']);
+        }
 
-        do {
-            try {
-                //if the request contains a query string we need to append it to the URI so that
-                //the signature will be calculated based on the query string variables as well
-                if (array_key_exists('query', $options) && strlen(implode($options['query']))){
-                    $uri = "$uri?".http_build_query($options['query']);
-                }
-
-                //setting Authorization
-                $options['headers']['Authorization'] = "AP {$this->config['api_key']}:{$this->sign($method, $uri, $options['body'])}";
-                $response = $this->parseResponse($this->http->{strtolower($method)}($uri, $options));
-                //exit from loop
-                break;
-            }catch (TooManyRequestsException $e){
-                //sleep until is able to process further requests
-                $now = new DateTime('now', new DateTimeZone('UTC'));
-                sleep((int) $e->resettingAt()->getTimestamp() - $now->getTimestamp());
-            }
-
-        } while(++$attempts <= $this->config['max_fail_retries']);
+        //setting Authorization
+        $options['headers']['Authorization'] = "AP {$this->config['api_key']}:{$this->sign($method, $uri, $options['body'])}";
+        $response = $this->parseResponse($this->http->{strtolower($method)}($uri, $options));
 
         return $response;
     }
