@@ -2,8 +2,6 @@
 
 namespace AgilePay\Sdk;
 
-use DateTime;
-use DateTimeZone;
 use AgilePay\Sdk\Response;
 use GuzzleHttp\ClientInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -126,6 +124,7 @@ class Client
      * @param $method
      * @param $uri
      * @param array $options
+     * @return \AgilePay\Sdk\Response
      */
     protected function request($method, $uri, array $options = [])
     {
@@ -207,6 +206,8 @@ class Client
      * @throws TooManyRequestsException
      * @throws UnauthorizedException
      * @throws ValidationException
+     * @throws PaymentRequiredException
+     * @throws Exception
      */
     private function parseResponse(ResponseInterface $response)
     {
