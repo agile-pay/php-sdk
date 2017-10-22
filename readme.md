@@ -1,3 +1,13 @@
+<table width="890"><tr>
+<td width="127" align="center"><b>Code climate</b></td>
+</tr>
+<tr>
+    <td valign="top" width="127" align="center">
+        <a href="https://codeclimate.com/github/agile-pay/php-sdk/maintainability"><img src="https://api.codeclimate.com/v1/badges/5d62a14c2b4db5490aba/maintainability"/></a>
+    </td>
+</tr>
+</table>
+
 ## Install
 
 ```bash
