@@ -18,7 +18,7 @@ use AgilePay\Sdk\Exceptions\Http\TooManyRequestsException;
 class Client
 {
     const API_VERSION = 1;
-    const SDK_VERSION = '1.0.0';
+    const SDK_VERSION = '1.0.1';
 
     const ENV_LOCAL = 'local';
     const ENV_TESTING = 'testing';
@@ -159,6 +159,8 @@ class Client
         //if the request contains a query string we need to append it to the URI so that
         //the signature will be calculated based on the query string variables as well
         if (array_key_exists('query', $options) && strlen(implode($options['query']))){
+            //we also need to sort the variables alphabetically
+            ksort($options['query']);
             $uri = "$uri?".http_build_query($options['query']);
         }
 
