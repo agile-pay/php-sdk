@@ -2,5 +2,5 @@
 
 namespace AgilePay\Sdk\Exceptions\Http;
 
-class NotFoundException extends \Exception
+class NotFoundException extends Exception
 {}

@@ -2,5 +2,5 @@
 
 namespace AgilePay\Sdk\Exceptions\Http;
 
-class PaymentRequiredException extends \Exception
+class PaymentRequiredException extends Exception
 {}

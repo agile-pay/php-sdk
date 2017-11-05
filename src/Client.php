@@ -219,16 +219,15 @@ class Client
         if (in_array($status, [200, 201, 204])){
             return new Response($response);
         }else switch ($status){
-            //4xx
-            case 401 : throw new UnauthorizedException('Wrong authentication'); break;
-            case 402 : throw new PaymentRequiredException('Either a payment is required or you don\'t have enough credit'); break;
-            case 403 : throw new UnauthorizedException('You are not authorized to perform this action'); break;
-            case 404 : throw new NotFoundException($response->getBody()->getContents()); break;
-            case 408 : throw new TimeoutException(); break;
+            case 401 : throw new UnauthorizedException($response); break;
+            case 402 : throw new PaymentRequiredException($response); break;
+            case 403 : throw new UnauthorizedException($response); break;
+            case 404 : throw new NotFoundException($response); break;
+            case 408 : throw new TimeoutException($response); break;
             case 422 : throw new ValidationException($response); break;
             case 429 : throw new TooManyRequestsException($response); break;
-            case 500 : throw new ServerErrorException("An internal error has occurred, sorry for the inconvenience."); break;
-            default  : throw new Exception("An error has occurred, sorry for the inconvenience. HTTP Code : $status");
+            case 500 : throw new ServerErrorException($response); break;
+            default  : throw new Exception($response);
         }
     }
 

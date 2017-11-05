@@ -6,7 +6,7 @@ use DateTime;
 use DateTimeZone;
 use Psr\Http\Message\ResponseInterface;
 
-class TooManyRequestsException extends \Exception
+class TooManyRequestsException extends Exception
 {
     /**
      * @var \DateTime
@@ -18,7 +18,7 @@ class TooManyRequestsException extends \Exception
         $limit = $response->getHeader('X-Ratelimit-Limit');
         $resetting = $response->getHeader('X-Ratelimit-Reset');
         $this->resettingAt = DateTime::createFromFormat('U', $resetting[0], new DateTimeZone('UTC'));
-        parent::__construct("Limit of {$limit[0]} requests reached!");
+        parent::__construct($response, "Limit of {$limit[0]} requests reached!");
     }
 
     /**

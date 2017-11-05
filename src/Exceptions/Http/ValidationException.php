@@ -2,7 +2,6 @@
 
 namespace AgilePay\Sdk\Exceptions\Http;
 
-use Exception;
 use Psr\Http\Message\ResponseInterface;
 
 class ValidationException extends Exception
@@ -16,10 +15,13 @@ class ValidationException extends Exception
 
     public function __construct(ResponseInterface $response)
     {
-        $this->errors = json_decode(
-            $response->getBody()->getContents()
-        );
-        parent::__construct('Malformed request!');
+        $decoded = json_decode($response->getBody()->getContents(), true);
+
+        if (isset($decoded['details'])){
+            $this->errors = $decoded['details'];
+        }
+
+        parent::__construct($response);
     }
 
     /**

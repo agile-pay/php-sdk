@@ -2,7 +2,5 @@
 
 namespace AgilePay\Sdk\Exceptions\Http;
 
-class TimeoutException extends \Exception
-{
-
-}
+class TimeoutException extends Exception
+{}
