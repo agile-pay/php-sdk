@@ -18,7 +18,7 @@ use AgilePay\Sdk\Exceptions\Http\TooManyRequestsException;
 class Client
 {
     const API_VERSION = 1;
-    const SDK_VERSION = '1.0.1';
+    const SDK_VERSION = '1.0.2';
 
     const ENV_LOCAL = 'local';
     const ENV_TESTING = 'testing';
